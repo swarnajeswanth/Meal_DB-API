@@ -1,0 +1,238 @@
+
+/* Setting the Font family to Every Element */
+*{
+    font-family: sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+/* Setting the View port Height and width  */
+body{
+    overflow:hidden ;
+    height: 95vh;
+}
+
+/* Styling the Heading Content of the page  */
+header{
+    display: flex;
+    width:80vw;
+    height: 15%;
+    margin: 1% 3%;
+    margin-bottom: 3%;
+}
+    /* Header Image styling  */
+header > img{
+    width:19%;
+    height:110%;
+    margin-right: 35%;
+}
+
+/* Navigation Links */
+#navigation{
+    display: flex;
+    flex-grow: 1;
+    height:40%; 
+    align-items: center;
+    justify-content: space-between;
+    color:black;
+    background-color: antiquewhite;
+    border-radius: 14px;
+    margin: 3% 2%;
+    overflow: hidden;
+    box-shadow: 0 0 1rem 0.1em wheat;
+}
+#navigation > ul:nth-child(1){
+    padding-left: 5%;
+    flex-grow: 1;
+    list-style-type:none ;
+}
+#navigation ul>a,.Sugg_result > a {
+    text-decoration: none;
+    color:black;
+    font-weight: bolder;
+    font-size: 80%;
+}
+
+/* While Mouse over the Links Styling  */
+#navigation ul>a:hover{
+    color:red;
+}
+#navigation ul:nth-child(2n){
+    list-style-type:none ;
+    display: flex;
+    width:30%;
+    margin-right: 5%;
+    justify-content: space-between;
+}
+
+.container{
+    position: relative;
+    width:98%;
+    /* min-height: 50vh; */
+    height: 88%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    
+}
+
+#food_Menu{
+    display: flex;
+    align-self: center;
+    border-radius: 14px;
+    width:66%;
+    background-color: rgb(249, 245, 244);   
+    justify-content: space-between;
+    box-shadow: 0 0 0.4rem 0.1rem ;
+    cursor: pointer;
+}
+
+
+#food_Menu , .suggestions{
+   min-height:45px;
+}
+#food_Menu > i{
+    height:100%;
+    width:6%;
+    text-align: center;
+    padding-top: 1.3%;
+    background-color: black;
+    border-top-left-radius: 14px;
+    border-bottom-left-radius: 14px;
+    color:white;
+}
+#food_Menu input[type="search"]{
+    background-color: inherit;
+    border: transparent;
+    outline: transparent;
+    width:60%;
+    flex-grow: 1;
+    border-radius: 14px;
+}
+
+
+#food_Menu input{
+    padding-left: 3%;
+    font-size: 98%;
+}
+
+.suggestions::-webkit-scrollbar ,.recipe::-webkit-scrollbar ,.favourite::-webkit-scrollbar{
+    display: none;
+  }
+.suggestions{
+    margin:2% 0;
+    width: 62.5%;
+    margin-left: 20%;
+    background-color: white;
+    min-height: 5%;
+    max-height: 78%;
+    border-radius: 14px;
+    overflow-y: scroll;
+    display: none;
+    background-color: antiquewhite;
+    box-shadow: 0 0 0.7rem 0.1rem wheat;
+}
+
+
+
+/* Search Result */
+
+    #search_Result{
+        display: flex;
+        flex-wrap: wrap;
+        list-style-type: none;
+        justify-content: space-around;
+        scroll-behavior: smooth;
+        background-color: antiquewhite;
+    }
+    #search_Result {
+        color:black;
+        padding:0 2%;
+        border-radius: 14px;
+        /* height: 10%; */
+    }  
+
+
+.Sugg_result{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width:32%;
+    height:auto;
+    margin: 1% 0;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 14px;
+}
+.Sugg_result:hover{
+    box-shadow: 0 0 0.6rem 0.1rem black;
+}
+.Sugg_result:hover img{
+    opacity: 0.65;
+}
+
+.Sugg_result > img{
+    /* padding-top:3%; */
+    width:93%;
+    height:85%;
+    margin:auto;
+    border-radius: 14px;
+    z-index: 0;
+}
+
+.Sugg_result > i{
+    position: absolute;
+    top:10%;
+    right:10%;
+    z-index: 1;
+    color:white;
+    
+}
+.Sugg_result > i:hover{
+    color:red;
+}
+.Sugg_result > a>p{
+    text-align: center;
+}
+.Sugg_result >p:hover{
+    text-decoration: underline black solid;
+}
+
+
+.favourite > ul li{
+    list-style-type: none;
+    padding: 2% 10%;
+    margin:2% 2%;
+    border-radius: 14px;
+    font-size: 82%;
+    font-weight: bolder;
+    opacity: 0.6;
+}
+.favourite > ul li:hover{
+    background-color: antiquewhite;
+    opacity:1;
+}
+.favourite > ul a{
+    text-decoration: none;
+    color:black;
+}
+
+.favourite{
+    position: absolute;
+    min-height: 40%;
+    max-height:76%;
+    width:16%;
+    left:1%;
+    top:11%;
+    border-radius: 14px;
+    box-shadow: 0 0 1rem 0.1rem wheat;
+    overflow-y: scroll;
+}
+#favourite_Card{
+   display: flex;
+   justify-content: space-between;
+   margin:5% 8%;
+   
+}
