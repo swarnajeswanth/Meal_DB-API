@@ -17,22 +17,24 @@ body{
 header{
     display: flex;
     width:80vw;
-    height: 15%;
+    min-height: 100px;
     margin: 1% 3%;
     margin-bottom: 3%;
+    justify-content: space-between;
 }
     /* Header Image styling  */
 header > img{
-    width:19%;
+    width:170px;
     height:110%;
-    margin-right: 35%;
 }
 
 /* Navigation Links */
 #navigation{
     display: flex;
-    flex-grow: 1;
-    height:40%; 
+    width:50%;
+    /* flex-grow: 1; */
+    height:35px;
+    /* max-height: 40%;  */
     align-items: center;
     justify-content: space-between;
     color:black;
@@ -44,9 +46,19 @@ header > img{
 }
 #navigation > ul:nth-child(1){
     padding-left: 5%;
-    flex-grow: 1;
+    display: flex;
+    width:40%;
+    justify-content: space-between;
     list-style-type:none ;
 }
+#navigation > ul:nth-child(2n){
+    list-style-type:none ;
+    display: flex;
+    width:30%;
+    margin-right: 5%;
+    justify-content: space-between;
+}
+
 #navigation ul>a,.Sugg_result > a {
     text-decoration: none;
     color:black;
@@ -57,13 +69,6 @@ header > img{
 /* While Mouse over the Links Styling  */
 #navigation ul>a:hover{
     color:red;
-}
-#navigation ul:nth-child(2n){
-    list-style-type:none ;
-    display: flex;
-    width:30%;
-    margin-right: 5%;
-    justify-content: space-between;
 }
 
 .container{
@@ -95,9 +100,9 @@ header > img{
 }
 #food_Menu > i{
     height:100%;
-    width:6%;
+    width:40px;
     text-align: center;
-    padding-top: 1.3%;
+    padding-top: 15px;
     background-color: black;
     border-top-left-radius: 14px;
     border-bottom-left-radius: 14px;
@@ -201,29 +206,12 @@ header > img{
 }
 
 
-.favourite > ul li{
-    list-style-type: none;
-    padding: 2% 10%;
-    margin:2% 2%;
-    border-radius: 14px;
-    font-size: 82%;
-    font-weight: bolder;
-    opacity: 0.6;
-}
-.favourite > ul li:hover{
-    background-color: antiquewhite;
-    opacity:1;
-}
-.favourite > ul a{
-    text-decoration: none;
-    color:black;
-}
 
 .favourite{
     position: absolute;
     min-height: 40%;
     max-height:76%;
-    width:16%;
+    width:185px;
     left:1%;
     top:11%;
     border-radius: 14px;
@@ -233,6 +221,84 @@ header > img{
 #favourite_Card{
    display: flex;
    justify-content: space-between;
-   margin:5% 8%;
+   margin:5% 8%; 
+}
+
+.favourite_List{
+    width:95%;
+    margin:0 auto;
+}
+.favourite_Item_Card{
+    display: flex;
+    height:30px;
+    justify-content: space-between;
+    align-items: center;
+    margin:4%;
+    padding:2%;
+}
+.favourite_Item_Card > a{
+    list-style-type: none;
+    text-decoration: none;
+    font-size: 85%;
+    color:black;
+    margin-left: 5%;
+    opacity: 0.7;
    
+}
+.favourite_Item_Card > i{
+    margin-right: 5%;
+}
+.favourite_Item_Card:hover{
+    color:red;
+    background-color: wheat;
+    box-shadow: 0 0 0.5rem 0.1rem black;
+    border-radius: 14px;
+}
+.favourite_Item_Card >a:hover{
+    color:red;
+}
+
+@media screen and (max-width: 980px){
+    header{
+        width:90%;
+    }
+    #food_Menu{
+        margin-left: 6%;   
+    }
+    .suggestions{
+        margin-left: 25.5%;
+    }
+}
+@media screen and (max-width: 800px){
+  
+    .suggestions{
+        margin-top: 5%;
+        height: 53%;
+        width:90%;
+        margin-left: 6%;
+    }
+    .favourite{
+        /* position: relative; */
+        top:unset;
+        bottom:40px;
+        width: 60%;
+        left:20%;
+        display: inline-block;
+        min-height: 5%;
+        max-height: 23%;
+       
+    }
+    #navigation{
+        width:65%;
+    }
+    
+}
+
+@media screen and (max-width: 800px){
+    #navigation > ul:nth-child(1){
+        width:48%;
+    }
+    #navigation > ul:nth-child(2){
+        width:36%;
+    }
 }

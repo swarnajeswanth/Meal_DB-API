@@ -3,20 +3,38 @@ if(window.location.href.split('?')[0]=='http://127.0.0.1:5500/HTML/Home.html' ||
             var search_Area=document.getElementById("search_area");
             var suggestion_Area= document.querySelector(".suggestions");
             var suggestion_result= document.querySelector("#search_Result");
-            var searchBtn=document.querySelector("#food_Menu i");
-            let Search_Data=[];
-            var search_Value;
-            var favourite_Recipe_list=[];
-            var Area=document.querySelector("#Area > ul");
-            var Area_Data=document.querySelector("#Area_Data>i");
-            var category=document.querySelector("#category > ul");
-            var category_Data=document.querySelector("#category_Data>i");
+            
             var Favourite;
             var favourite_Card=document.querySelector('#favourite_Card > i');
-            var favourite_Container=document.querySelector(".favourite > ul");
+            var favourite_Container=document.querySelector(".favourite > .favourite_List");
+
+            
+
+            favourite_Container.addEventListener('click',(e)=>{
+                let id= e.target.id.slice(1,e.target.id.length-1);
+                if(e.target.classList[1]=="fa-xmark"){
+                   localStorage.removeItem(id);
+                   favourite_List_render();
+                }
+            })
 
 
-
+            // fuction for redering the Favourite list on Window reload
+            function favourite_List_render(){
+                if(localStorage.length!=0){
+                    favourite_Container.setAttribute('style','display:none');
+                    favourite_Container.innerHTML='';
+                    for(i of Object.values(localStorage)){
+                        favourite_Container.innerHTML+=`<div class="favourite_Item_Card">
+                        <a href="./Meal_Detail_Page.html?id=\`${i}\`" onclick="meal_Details();">${i}</a>
+                        <i id="\`${i}\`"class="fa fa-xmark"></i>
+                        </div>
+                        `;
+                    }
+                    favourite_Card.classList.remove("fa-minus");
+                    favourite_Card.classList.add("fa-plus");
+                }
+            }
 
             // Adding items to Favourite List Event and Rendering List
             suggestion_result.addEventListener('click',(e)=>{
@@ -24,24 +42,17 @@ if(window.location.href.split('?')[0]=='http://127.0.0.1:5500/HTML/Home.html' ||
                     let heart=e.srcElement.offsetParent.lastElementChild;
                     if(heart.getAttribute('style')==null || heart.getAttribute('style')=="color:white"){
                             heart.setAttribute('style','color:red');
-                            favourite_Recipe_list.push(e.srcElement.offsetParent.outerText);
+                            localStorage.setItem(e.srcElement.offsetParent.outerText,e.srcElement.offsetParent.outerText);
                     }
                     else{
                         heart.setAttribute('style','color:white');
-                        favourite_Recipe_list.splice(favourite_Recipe_list.indexOf(e.srcElement.offsetParent.outerText),1);
+                        localStorage.removeItem(e.srcElement.offsetParent.outerText);
                     }
                 }
-                if(favourite_Recipe_list.length!=0){
-                    favourite_Container.setAttribute('style','display:none');
-                    favourite_Container.innerHTML='';
-                    for(i of favourite_Recipe_list){
-                        favourite_Container.innerHTML+=`<a href="./Meal_Detail_Page.html?id=\`${i}\`" onclick="return meal_Details();"><li>${i}</li></a>`;
-                    }
-                    favourite_Card.classList.remove("fa-minus");
-                    favourite_Card.classList.add("fa-plus");
-                }
+                favourite_List_render();
             });
 
+  
 
             favourite_Card.addEventListener('click',()=>{
                 if((favourite_Card.classList.value).includes("fa-plus")){
@@ -68,20 +79,19 @@ if(window.location.href.split('?')[0]=='http://127.0.0.1:5500/HTML/Home.html' ||
                     // let meal= value.meals.slice(0,25);
                     let meal=value.meals;
                     
-                    for(i of meal){
+                    for(i in meal){
                        
                         suggestion_result.innerHTML+=`
-                        <div class="Sugg_result" id=${i.strMeal}>
-                            <img src="${i.strMealThumb}" alt="">
-                            <a href="./Meal_Detail_Page.html?id=\`${i.strMeal}\`"><p>${i.strMeal}</p></a>
-                            <i id="\`${i.strMeal}\`"class="fa fa-duotone fa-heart"></i>
+                        <div class="Sugg_result" id=${meal[i].strMeal}>
+                            <img src="${meal[i].strMealThumb}" alt="">
+                            <a href="./Meal_Detail_Page.html?id=\`${meal[i].strMeal}\`"><p>${meal[i].strMeal}</p></a>
+                            <i id="\`${meal[i].strMeal}\`"class="fa fa-duotone fa-heart"></i>
                         </div>`;
-                        Search_Data.push(i.strMeal);
                         
                     };    
                     Favourite=document.querySelectorAll(".Sugg_result > i");
                     for(i of meal){
-                        if(favourite_Recipe_list.includes( i.strMeal)){
+                        if(Object.values(localStorage).includes( i.strMeal)){
                                  for(j of Favourite){
                                      if(j.id.slice(1,j.id.length-1)==i.strMeal){
                                         j.setAttribute('style','color:red');
@@ -111,29 +121,15 @@ if(window.location.href.split('?')[0]=='http://127.0.0.1:5500/HTML/Home.html' ||
                 // Event for Search bar and for Showing Suggestions 
                 search_Area.addEventListener('keyup',suggestions) ;
 
-            
-
-
-        // Event for Checking Click on any suggestion and checking if it is present in Listed Suggestion
-        suggestion_result.addEventListener('click',(e)=>{
-            search_Value=e.target.innerHTML;
-            for(i of Search_Data){
-                if(i==search_Value){
-                    suggestion_Area.setAttribute('style','display:none');
-                    return;
-                }
-            }
-        });
-
         // On Focus on Search Bar , The suggestion container should be visible
         search_Area.addEventListener('focusin',()=>{
             suggestion_Area.setAttribute('style','display:block');
         });
 
-
+        favourite_List_render();
     }()
 }
-else{
+else if(window.location.href.split('?')[0]=="http://127.0.0.1:5500/HTML/Meal_Detail_Page.html"){
     window.onload= function(){
         // Getting the Value sent through URL 
         let url_string=(window.location.href).toLowerCase();
@@ -154,7 +150,9 @@ else{
                 Response.json().then((value)=>{
                     meal_Details(value);
                 }).catch(()=>{
-                    alert("Error While parsing the API");
+                    alert("Error : Couldn't able to fetch the Recipe. Try Again .........!");
+                    window.history.back();
+                   
                 });
             });
         
@@ -210,6 +208,22 @@ else{
                     }
                 }
             }
-           
+    }()
+}
+else{
+    window.onload=function(){
+        let favourite=document.getElementById("favourite");
+        for(i of Object.keys(localStorage)){
+            fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${i}`).then((response)=>{
+                response.json().then((value)=>{
+                    let meal=value.meals;
+                    favourite.innerHTML+=`
+                    <div class="Sugg_result" id=${meal[0].strMeal}>
+                    <img src="${meal[0].strMealThumb}" alt="">
+                    <a href="./Meal_Detail_Page.html?id=\`${meal[0].strMeal}\`"><p>${meal[0].strMeal}</p></a>
+                    </div>`;
+                })
+            })
+        }
     }()
 }

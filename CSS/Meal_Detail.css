@@ -7,6 +7,7 @@
 
 body{
     overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 body::-webkit-scrollbar{
     display: none;
@@ -14,25 +15,25 @@ body::-webkit-scrollbar{
 /* Styling the Heading Content of the page  */
 header{
     display: flex;
-    width:90vw;
-    height: 7vw;
+    width:80vw;
+    min-height: 100px;
     margin: 1% 3%;
     margin-bottom: 3%;
-    /* border:1px solid red; */
-    align-items: center;
     justify-content: space-between;
 }
     /* Header Image styling  */
 header > img{
-    width:15%;
-    height:100%;
+    width:170px;
+    height:110%;
 }
 
 /* Navigation Links */
 #navigation{
     display: flex;
-    height:40%; 
-    width:35%;
+    width:50%;
+    /* flex-grow: 1; */
+    height:35px;
+    /* max-height: 40%;  */
     align-items: center;
     justify-content: space-between;
     color:black;
@@ -43,10 +44,21 @@ header > img{
     box-shadow: 0 0 1rem 0.1em wheat;
 }
 #navigation > ul:nth-child(1){
-    margin-left: 5%;
+    padding-left: 5%;
+    display: flex;
+    width:40%;
+    justify-content: space-between;
     list-style-type:none ;
 }
-#navigation ul>a{
+#navigation > ul:nth-child(2n){
+    list-style-type:none ;
+    display: flex;
+    width:30%;
+    margin-right: 5%;
+    justify-content: space-between;
+}
+
+#navigation ul>a,.Sugg_result > a {
     text-decoration: none;
     color:black;
     font-weight: bolder;
@@ -56,13 +68,6 @@ header > img{
 /* While Mouse over the Links Styling  */
 #navigation ul>a:hover{
     color:red;
-}
-#navigation ul:nth-child(2n){
-    list-style-type:none ;
-    display: flex;
-    width:25%;
-    margin-right: 5%;
-    justify-content: space-between;
 }
 
 
@@ -93,7 +98,7 @@ header > img{
 }
 #meal_Container > h1{
     border-bottom: 1px solid orange;
-    background-color: burlywood;
+    background-color: green;
     color:white;
     margin-bottom: 1%;
     text-align: center;
@@ -150,7 +155,7 @@ header > img{
     
 }
 .procedure > h2{
-    background-color: burlywood;
+    background-color: green;
     color:white;
     border-bottom-left-radius: 14px;
     border-bottom-right-radius:14px;
@@ -187,3 +192,70 @@ header > img{
 }
 
 
+
+
+@media screen and (max-width: 980px){
+    header{
+        width:90%;
+    }
+}
+@media screen and (max-width: 800px){
+  
+    #navigation{
+        width:65%;
+    }
+    
+}
+
+@media screen and (max-width: 800px){
+    #navigation > ul:nth-child(1){
+        width:48%;
+    }
+    #navigation > ul:nth-child(2){
+        width:36%;
+    }
+    .container{
+        flex-direction: column;
+        height: 100%;
+    }
+    .container > img{
+        width:80%;
+        margin: 15px 0;
+    }
+    #meal_Container{
+        width:90%;
+        margin-bottom: 1%;
+        height: 100%;
+    }
+    #meal_Container h1{
+        font-size: 15px;
+    }
+    .ingredients{
+        height: 5%;
+    }
+    .ingredients > div {
+        display: flex;
+        font-size: 13px;
+        font-weight: bolder;
+        flex-direction: row;
+        height: 12%;
+        width: 98%;
+    }
+    .ingredients span{
+        opacity: 0.5;
+        font-weight: bolder;
+    }
+    #procedure_Container .steps{
+        font-size: 10px;
+        width:45px;
+        top:-11%;
+    }
+    #procedure_Container p{
+        font-size:13px;
+        margin-left: 5%;
+    }
+    .procedure h2{
+        font-size: 15px;
+        margin-bottom: 5%;
+    }
+}
